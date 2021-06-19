@@ -1,0 +1,29 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:left;width:500px;">
+  <h1>
+    {{ title }}!
+  </h1>
+
+  <table *ngIf="arrMockData">
+    <thead>
+      <tr>
+        <th *ngFor="let key of keys">{{ key }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of arrMockData">
+        <!-- <td *ngFor="let column of keys">{{ row[column] }}</td> -->
+        <ng-container *ngFor="let column of keys">
+          <ng-container *ngIf="column === 'email'; then editableField; else staticField">
+          </ng-container>
+          <ng-template #editableField>
+            <td><input [(value)]="row[column]" class="table-cell"></td>
+          </ng-template>
+          <ng-template #staticField>
+            <td>{{ row[column] }}</td>
+          </ng-template>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
